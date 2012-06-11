@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="ano_media.form.media" class="Symfony\Component\Form\Form" factory-method="createNamed" factory-service="form.factory">
+            <argument>%ano_media.form.media.type%</argument>
+            <argument>%ano_media.form.media.name%</argument>
+            <argument />
+            <argument type="collection">
+                <argument key="validation_groups">%ano_media.form.media.validation_groups%</argument>
+            </argument>
+        </service>
+        
+        <service id="ano_media.form.media.type" class="Ano\MediaBundle\Form\Type\MediaType">
+            <tag name="form.type" alias="ano_media_media" />
+        </service>
+
+        <service id="ano_media.form.media.handler.default" class="Ano\MediaBundle\Form\Handler\MediaFormHandler" scope="request" public="false">
+            <argument type="service" id="ano_media.form.media" />
+            <argument type="service" id="request" />
+            <argument type="service" id="ano_media._manager" />
+        </service>
+    </services>
+</container>

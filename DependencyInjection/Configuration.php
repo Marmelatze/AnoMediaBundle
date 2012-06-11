@@ -314,6 +314,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->children()
                             ->scalarNode('provider')->end()
+                            ->scalarNode('class')->end()
                             ->arrayNode('generator')
                                 ->children()
                                     ->scalarNode('path')->end()

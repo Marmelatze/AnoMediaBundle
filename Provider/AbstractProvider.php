@@ -1,6 +1,6 @@
 <?php
-
 namespace Ano\Bundle\MediaBundle\Provider;
+
 
 use Gaufrette\Filesystem;
 use Ano\Bundle\MediaBundle\Model\Media;
@@ -8,6 +8,8 @@ use Ano\Bundle\MediaBundle\Cdn\CdnInterface;
 use Ano\Bundle\MediaBundle\Generator\Path\PathGeneratorInterface;
 use Ano\Bundle\MediaBundle\Generator\Uuid\UuidGeneratorInterface;
 use Ano\Bundle\SystemBundle\HttpFoundation\File\MimeType\ExtensionGuesser;
+use Symfony\Component\Form\FormBuilder;
+
 
 
 abstract class AbstractProvider implements ProviderInterface
@@ -175,5 +177,14 @@ abstract class AbstractProvider implements ProviderInterface
     public function updateMedia(Media $media)
     {
         $this->saveMedia($media);
+    }
+    
+    public function buildCreateForm(FormBuilder $builder)
+    {
+        $builder
+            ->add("binaryContent", "file", array(
+                    "translationDomain" => "AnoMediaBundle"
+            ))
+        ;
     }
 }
