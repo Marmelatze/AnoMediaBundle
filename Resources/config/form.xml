@@ -21,7 +21,7 @@
         <service id="ano_media.form.media.handler.default" class="Ano\MediaBundle\Form\Handler\MediaFormHandler" scope="request" public="false">
             <argument type="service" id="ano_media.form.media" />
             <argument type="service" id="request" />
-            <argument type="service" id="ano_media._manager" />
+            <argument type="service" id="ano_media.manager" />
         </service>
     </services>
 </container>

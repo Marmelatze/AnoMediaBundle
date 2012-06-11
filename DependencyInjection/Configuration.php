@@ -37,6 +37,7 @@ class Configuration implements ConfigurationInterface
         $this->addManipulatorSection($rootNode);
         $this->addFilesystemSection($rootNode);
         $this->addContextsSection($rootNode);
+        $this->addFormSection($rootNode);
 
         return $treeBuilder;
     }
@@ -332,5 +333,30 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end();
+    }
+    
+    protected function addFormSection(ArrayNodeDefinition $node)
+    {
+        $node
+        ->children()
+            ->arrayNode("form")
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->arrayNode("media")
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode("type")->defaultValue("ano_media_media")->end()
+                        ->scalarNode("handler")->defaultValue("ano_media.form.media.handler.default")->end()
+                        ->scalarNode("name")->defaultValue("ano_media_media_form")->cannotBeEmpty()->end()
+                        ->arrayNode("validation_groups")
+                            ->prototype("scalar")->end()
+                            ->defaultValue(array("Media", "Default"))
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ->end()
+        ;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Ano\Bundle\MediaBundle\Form;
+namespace Ano\Bundle\MediaBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilder;
 
@@ -7,7 +7,7 @@ use Ano\Bundle\MediaBundle\Model\MediaContext;
 
 use Symfony\Component\Form\AbstractType;
 
-class MediaUploadType extends AbstractType
+class MediaType extends AbstractType
 {
     protected $context;
     

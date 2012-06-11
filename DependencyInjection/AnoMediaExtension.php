@@ -50,7 +50,7 @@ class AnoMediaExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        foreach (array('provider', 'cdn', 'filesystem', 'generator', 'image', 'manager', 'templating', 'twig', 'orm') as $basename) {
+        foreach (array('provider', 'cdn', 'filesystem', 'generator', 'image', 'manager', 'templating', 'twig', 'orm', 'form') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
         
@@ -63,6 +63,7 @@ class AnoMediaExtension extends Extension
         $this->initManipulators($config, $manager, $container);
         $this->initProviders($config, $manager, $container);
         $this->initContexts($config, $manager, $container);
+        $this->initForms($config['form'], $container);
 
     }
 
@@ -244,6 +245,13 @@ class AnoMediaExtension extends Extension
 
             $manager->addMethodCall('addContext', array($name, $context));
         }
+    }
+    
+    protected function initForms(array $config, ContainerBuilder $container)
+    {
+        $this->remapParametersNamespaces($config, $container, array(
+            "media" => "ano_media.form.media.%s"
+        ));
     }
 
     public function getAlias()
